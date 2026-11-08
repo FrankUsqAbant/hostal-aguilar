@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+/* Hostal Aguilar · concepto "la luz encendida": noche → ámbar → crema, adobe de Cajamarca */
+@theme {
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "Manrope", system-ui, -apple-system, sans-serif;
+
+  --color-night: #1C1B2B;
+  --color-night-2: #2B2740;
+  --color-dusk: #4A3340;
+  --color-amber: #F2B66B;
+  --color-amber-d: #D9954A;
+  --color-cream: #F6EFE4;
+  --color-paper: #FBF7F0;
+  --color-ink: #2A211C;
+  --color-muted: #6E5F54;
+  --color-adobe: #B5562F;
+  --color-adobe-d: #8E3F1F;
+  --color-line: #E4D8C8;
+
+  /* Escalas "slate" y "blue" de Tailwind redefinidas en tonos de la marca:
+     el panel admin y los modales heredan la paleta sin reescribir sus clases. */
+  --color-slate-50: #FBF7F0;
+  --color-slate-100: #F6EFE4;
+  --color-slate-200: #E4D8C8;
+  --color-slate-300: #CDBDA9;
+  --color-slate-400: #A69482;
+  --color-slate-500: #7E6E61;
+  --color-slate-600: #6E5F54;
+  --color-slate-700: #4F433A;
+  --color-slate-800: #3A302A;
+  --color-slate-900: #2A211C;
+  --color-slate-950: #1C1612;
+
+  --color-blue-50: #FBEFE8;
+  --color-blue-100: #F6DCCD;
+  --color-blue-200: #EDBFA6;
+  --color-blue-300: #E09B78;
+  --color-blue-400: #CF7A52;
+  --color-blue-500: #C2653B;
+  --color-blue-600: #B5562F;
+  --color-blue-700: #9E4A28;
+  --color-blue-800: #8E3F1F;
+  --color-blue-900: #6F3118;
+  --color-blue-950: #4A2010;
+
+  /* colores antiguos remapeados */
+  --color-brand-blue: #2A211C;
+  --color-brand-red: #B5562F;
+  --color-brand-green: #25d366;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    overflow-x: clip;
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    transition-property: none;
+    outline: 3px solid var(--color-adobe);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  ::selection { background: var(--color-amber); color: var(--color-night); }
+}
+
+@layer components {
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+    border-radius: 999px; padding: .9rem 1.4rem; font-weight: 700; font-size: .95rem;
+    transition: transform .2s ease, background-color .2s ease, color .2s ease;
+    cursor: pointer;
+  }
+  .btn:active { transform: scale(.98); }
+  .btn-amber { background: var(--color-amber); color: var(--color-night); }
+  .btn-amber:hover { background: #F6C786; }
+  .btn-adobe { background: var(--color-adobe); color: var(--color-paper); }
+  .btn-adobe:hover { background: var(--color-adobe-d); }
+  .btn-line { border: 1px solid currentColor; padding: .7rem 1.2rem; font-weight: 600; }
+}
+
+/* Pulso suave del punto "recepción abierta" */
+@keyframes lampPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(242, 182, 107, .55); }
+  50% { box-shadow: 0 0 0 8px rgba(242, 182, 107, 0); }
+}
+.lamp { animation: lampPulse 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
